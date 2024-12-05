@@ -1,0 +1,26 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="ServiceRegistry" />
+          <option value="ServiceRegistry" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="org.bouncycastle:bcprov-jdk15on:1.68" />
+          <option value="com.thoughtworks.xstream:xstream:1.4.18" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="dev&#10;" />
+          <option value="Not exploitable" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
