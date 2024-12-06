@@ -94,6 +94,13 @@ public class VenueServiceImpl implements VenueService{
 
     @Override
     public String bookVenue(Long venueId, VenueAvailabilityModel venueAvailabilityModel) {
+        try{
+            Venue venue = venueRepo.findById(venueId).get();
+        } catch (Exception e){
+            throw new RuntimeException("Venue with venueid "+ venueId + " not found");
+        }
+
+
         VenueAvailability venueAvailability = venueAvailabilityModelToVenueAvailability(venueAvailabilityModel);
 
         venueAvailability.setVenueId(venueId);

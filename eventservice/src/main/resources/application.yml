@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: eventservice
+    name: EVENT-SERVICE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    password: admin

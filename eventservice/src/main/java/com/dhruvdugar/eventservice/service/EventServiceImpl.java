@@ -2,8 +2,11 @@ package com.dhruvdugar.eventservice.service;
 
 
 import com.dhruvdugar.eventservice.entity.Event;
+import com.dhruvdugar.eventservice.external.client.VenueService;
 import com.dhruvdugar.eventservice.model.EventModel;
 import com.dhruvdugar.eventservice.repository.EventRepository;
+import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +14,25 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Slf4j
 public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventRepository eventRepo;
+    @Autowired
+    private VenueService venueService;
+
+
 
 
     @Override
     public EventModel createEvent(EventModel eventModel){
         Event event = eventRepo.save(EventModelToEvent(eventModel));
+        VenueAvailabilityModel venueAvailabilityModel = new VenueAvailabilityModel();
+        venueAvailabilityModel.setVenueId(eventModel.getVenueId());
+        venueAvailabilityModel.setStartDateTime(eventModel.getStartDateTime());
+        venueAvailabilityModel.setEndDateTime(eventModel.getEndDateTime());
+        venueService.bookVenue(eventModel.getVenueId(), venueAvailabilityModel);
         return EventToEventModel(event);
     }
 

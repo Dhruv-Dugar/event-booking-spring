@@ -2,7 +2,7 @@ server:
   port: 8083
 spring:
   application:
-    name: venueservice
+    name: VENUE-SERVICE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    password: admin
