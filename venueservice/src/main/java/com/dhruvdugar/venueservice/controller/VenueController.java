@@ -5,9 +5,12 @@ import com.dhruvdugar.venueservice.model.APIResponse;
 import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
 import com.dhruvdugar.venueservice.model.VenueModel;
 import com.dhruvdugar.venueservice.service.VenueService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/venues")
@@ -46,9 +49,17 @@ public class VenueController {
     }
 
 
-    @PostMapping("/{venueId}/bookvenue")
+    @PostMapping("/{venueId}/bookVenue")
     public ResponseEntity<APIResponse> bookVenue(@PathVariable("venueId") Long venueId, @RequestBody VenueAvailabilityModel venueAvailabilityModel){
         String bookingStatus = venueService.bookVenue(venueId, venueAvailabilityModel);
         return ResponseEntity.ok(new APIResponse(true, "Venue booked successfully", bookingStatus));
     }
+
+    @GetMapping("/{venueId}/bookedSlots")
+    public ResponseEntity<APIResponse> getBookedSlots(@PathVariable("venueId") Long venueId){
+        List<VenueAvailabilityModel> availabilityModels = venueService.getBookedSlots(venueId);
+
+        return ResponseEntity.ok(new APIResponse(true, "Booked slots fetched successfully", availabilityModels));
+    }
+
 }

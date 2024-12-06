@@ -18,7 +18,7 @@ public class VenueServiceImpl implements VenueService{
     @Autowired
     private VenueRepository venueRepo;
 
-    @Auto
+    @Autowired
     private VenueAvailabilityRepository venueAvailabilityRepo;
 
     @Override
@@ -102,7 +102,13 @@ public class VenueServiceImpl implements VenueService{
         return "Venue booked successfully";
     }
 
-
+    @Override
+    public List<VenueAvailabilityModel> getBookedSlots(Long venueId) {
+        List<VenueAvailability> venueAvailabilities = venueAvailabilityRepo.findAllByVenueId(venueId);
+        return venueAvailabilities.stream()
+                .map(this::venueAvailabilityToVenueAvailabilityModel)
+                .toList();
+    }
 
 
     protected Venue VenueModelToVenue(VenueModel venueModel){
@@ -136,6 +142,7 @@ public class VenueServiceImpl implements VenueService{
     protected VenueAvailability venueAvailabilityModelToVenueAvailability(VenueAvailabilityModel venueAvailabilityModel){
         VenueAvailability venueAvailability = new VenueAvailability();
         venueAvailability.setVenueId(venueAvailabilityModel.getVenueId());
+        venueAvailability.setId(venueAvailabilityModel.getId());
         venueAvailability.setStartDateTime(venueAvailabilityModel.getStartDateTime());
         venueAvailability.setEndDateTime(venueAvailabilityModel.getEndDateTime());
         venueAvailability.setAvailable(false);
@@ -145,6 +152,7 @@ public class VenueServiceImpl implements VenueService{
     protected VenueAvailabilityModel venueAvailabilityToVenueAvailabilityModel(VenueAvailability venueAvailability){
         VenueAvailabilityModel venueAvailabilityModel = new VenueAvailabilityModel();
         venueAvailabilityModel.setVenueId(venueAvailability.getVenueId());
+        venueAvailabilityModel.setId(venueAvailability.getId());
         venueAvailabilityModel.setStartDateTime(venueAvailability.getStartDateTime());
         venueAvailabilityModel.setEndDateTime(venueAvailability.getEndDateTime());
         return venueAvailabilityModel;
