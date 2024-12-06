@@ -2,6 +2,7 @@ package com.dhruvdugar.venueservice.controller;
 
 
 import com.dhruvdugar.venueservice.model.APIResponse;
+import com.dhruvdugar.venueservice.model.VenueAvailability;
 import com.dhruvdugar.venueservice.model.VenueModel;
 import com.dhruvdugar.venueservice.service.VenueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,14 @@ public class VenueController {
     public ResponseEntity<APIResponse> deleteVenue(@PathVariable("venueId") Long venueId){
         String result = venueService.deleteVenue(venueId);
         return ResponseEntity.ok(new APIResponse(true, "Venue deleted successfully", null));
+    }
+
+
+    @PostMapping("/{venueId}/bookvenue")
+    public ResponseEntity<APIResponse> bookVenue(@PathVariable("venueId") Long venueId, @RequestBody VenueAvailability venueAvailabilityModel){
+//        VenueModel updatedVenue = venueService.bookVenue(venueId, venueModel);
+//        return ResponseEntity.ok(new APIResponse(true, "Venue booked successfully", updatedVenue));
+        String bookingStatus = venueService.bookVenue(venueId, venueAvailabilityModel);
+        return ResponseEntity.ok(new APIResponse(true, "Venue booked successfully", bookingStatus));
     }
 }

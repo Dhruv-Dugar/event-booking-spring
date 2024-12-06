@@ -1,6 +1,7 @@
 package com.dhruvdugar.venueservice.service;
 
 import com.dhruvdugar.venueservice.entity.Venue;
+import com.dhruvdugar.venueservice.model.VenueAvailability;
 import com.dhruvdugar.venueservice.model.VenueModel;
 import com.dhruvdugar.venueservice.repository.VenueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,12 @@ public class VenueServiceImpl implements VenueService{
         return "Venue with venueid "+ venueId + " deleted successfully";
     }
 
+    @Override
+    public String bookVenue(Long venueId, VenueAvailability venueAvailabilityModel) {
+        return "";
+    }
+
+
     protected Venue VenueModelToVenue(VenueModel venueModel){
         Venue venue = new Venue();
         venue.setVenueId(venueModel.getVenueId());
@@ -118,4 +125,9 @@ public class VenueServiceImpl implements VenueService{
         venueModel.setImageURL(venue.getImageURL());
         return venueModel;
     }
+
+    protected VenueAvailability venueAvailabilityModelToVenueAvailability(VenueAvailability venueAvailability){
+
+    }
+
 }
