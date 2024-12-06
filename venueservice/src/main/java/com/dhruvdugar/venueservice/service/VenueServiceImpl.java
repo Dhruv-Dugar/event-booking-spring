@@ -104,6 +104,8 @@ public class VenueServiceImpl implements VenueService{
 
     @Override
     public List<VenueAvailabilityModel> getBookedSlots(Long venueId) {
+        // TODO
+        // change this method to allow if date is also provided and then do processing
         List<VenueAvailability> venueAvailabilities = venueAvailabilityRepo.findAllByVenueId(venueId);
         return venueAvailabilities.stream()
                 .map(this::venueAvailabilityToVenueAvailabilityModel)
