@@ -5,7 +5,8 @@ spring:
     name: eventservice
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: admin
+#    password: admin
+    password: admin@123
     url: jdbc:mysql://localhost:3306/eventservicedb
     username: root
   jpa:

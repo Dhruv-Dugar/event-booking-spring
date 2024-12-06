@@ -1,7 +1,7 @@
 package com.dhruvdugar.venueservice.model;
 
 public class VenueModel {
-    private Long venueId;
+    private Long id;
     private String venueName;
     private String address;
     private String city;
@@ -16,7 +16,7 @@ public class VenueModel {
     }
 
     public VenueModel(Long venueId, String venueName, String address, String city, String state, String zip, int capacity, String amenities, String description, String imageURL) {
-        this.venueId = venueId;
+        this.id = venueId;
         this.venueName = venueName;
         this.address = address;
         this.city = city;
@@ -28,12 +28,12 @@ public class VenueModel {
         this.imageURL = imageURL;
     }
 
-    public Long getVenueId() {
-        return venueId;
+    public Long getId() {
+        return id;
     }
 
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getVenueName() {

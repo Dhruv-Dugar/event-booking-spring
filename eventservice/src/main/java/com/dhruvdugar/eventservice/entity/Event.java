@@ -9,6 +9,7 @@ import org.hibernate.type.TrueFalseConverter;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Entity
 @Table(name="events")
@@ -36,10 +37,17 @@ public class Event {
 
     @Column(name="event_organizer")
     private Long organizerId;
-//
-//    @Convert(converter = TrueFalseConverter.class)
-//    private Boolean isDeleted = false;
 
+    @Enumerated
+    private EventStatus eventStatus;
+
+    @ManyToMany
+    @JoinTable(
+            name="event_category",
+            joinColumns = @JoinColumn(name="event_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id")
+    )
+    private Set<Category> categories;
 
     @CreationTimestamp
     private Instant createdAt;

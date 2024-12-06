@@ -1,14 +1,15 @@
 package com.dhruvdugar.venueservice.service;
 
 import com.dhruvdugar.venueservice.entity.Venue;
-import com.dhruvdugar.venueservice.model.VenueAvailability;
+import com.dhruvdugar.venueservice.entity.VenueAvailability;
+import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
 import com.dhruvdugar.venueservice.model.VenueModel;
+import com.dhruvdugar.venueservice.repository.VenueAvailabilityRepository;
 import com.dhruvdugar.venueservice.repository.VenueRepository;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 @Service
 public class VenueServiceImpl implements VenueService{
@@ -17,16 +18,17 @@ public class VenueServiceImpl implements VenueService{
     @Autowired
     private VenueRepository venueRepo;
 
+    @Auto
+    private VenueAvailabilityRepository venueAvailabilityRepo;
+
     @Override
     public VenueModel createVenue(VenueModel venueModel) {
-//        return null;
         Venue venue = venueRepo.save(VenueModelToVenue(venueModel));
         return VenueToVenueModel(venue);
     }
 
     @Override
     public VenueModel getVenue(Long venueId) {
-//        return null;
         Venue venue = venueRepo.findById(venueId).get();
         return VenueToVenueModel(venue);
     }
@@ -91,14 +93,21 @@ public class VenueServiceImpl implements VenueService{
     }
 
     @Override
-    public String bookVenue(Long venueId, VenueAvailability venueAvailabilityModel) {
-        return "";
+    public String bookVenue(Long venueId, VenueAvailabilityModel venueAvailabilityModel) {
+        VenueAvailability venueAvailability = venueAvailabilityModelToVenueAvailability(venueAvailabilityModel);
+
+        venueAvailability.setVenueId(venueId);
+
+        venueAvailabilityRepo.save(venueAvailability);
+        return "Venue booked successfully";
     }
+
+
 
 
     protected Venue VenueModelToVenue(VenueModel venueModel){
         Venue venue = new Venue();
-        venue.setVenueId(venueModel.getVenueId());
+        venue.setId(venueModel.getId());
         venue.setName(venueModel.getVenueName());
         venue.setAddress(venueModel.getAddress());
         venue.setCity(venueModel.getCity());
@@ -110,10 +119,9 @@ public class VenueServiceImpl implements VenueService{
         venue.setImageURL(venueModel.getImageURL());
         return venue;
     }
-
     protected VenueModel VenueToVenueModel(Venue venue){
         VenueModel venueModel = new VenueModel();
-        venueModel.setVenueId(venue.getVenueId());
+        venueModel.setId(venue.getId());
         venueModel.setVenueName(venue.getName());
         venueModel.setAddress(venue.getAddress());
         venueModel.setCity(venue.getCity());
@@ -125,9 +133,21 @@ public class VenueServiceImpl implements VenueService{
         venueModel.setImageURL(venue.getImageURL());
         return venueModel;
     }
+    protected VenueAvailability venueAvailabilityModelToVenueAvailability(VenueAvailabilityModel venueAvailabilityModel){
+        VenueAvailability venueAvailability = new VenueAvailability();
+        venueAvailability.setVenueId(venueAvailabilityModel.getVenueId());
+        venueAvailability.setStartDateTime(venueAvailabilityModel.getStartDateTime());
+        venueAvailability.setEndDateTime(venueAvailabilityModel.getEndDateTime());
+        venueAvailability.setAvailable(false);
+        return venueAvailability;
+    }
 
-    protected VenueAvailability venueAvailabilityModelToVenueAvailability(VenueAvailability venueAvailability){
-
+    protected VenueAvailabilityModel venueAvailabilityToVenueAvailabilityModel(VenueAvailability venueAvailability){
+        VenueAvailabilityModel venueAvailabilityModel = new VenueAvailabilityModel();
+        venueAvailabilityModel.setVenueId(venueAvailability.getVenueId());
+        venueAvailabilityModel.setStartDateTime(venueAvailability.getStartDateTime());
+        venueAvailabilityModel.setEndDateTime(venueAvailability.getEndDateTime());
+        return venueAvailabilityModel;
     }
 
 }

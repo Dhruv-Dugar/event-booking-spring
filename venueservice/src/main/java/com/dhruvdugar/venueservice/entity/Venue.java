@@ -12,46 +12,27 @@ import java.time.Instant;
 public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long venueId;
-
-    @Column(name = "venue_name")
+    private Long id;
     private String name;
-
-    @Column(name="venue_address")
     private String address;
-
-    @Column(name="venue_city")
     private String city;
-
-    @Column(name="venue_state")
     private String state;
-
-    @Column(name="venue_zip")
     private String zip;
-
-    @Column(name="venue_capacity")
     private int capacity;
-
-    @Column(name="amenities")
     private String amenities;
-
-    @Column(name="description")
     private String description;
+    private String imageURL;
 
     @CreationTimestamp
     private Instant createdAt;
-
     @UpdateTimestamp
     private Instant updatedAt;
-
-    @Column(name="venue_picture")
-    private String imageURL;
 
     public Venue() {
     }
 
-    public Venue(Long venueId, String name, String address, String city, String state, String zip, int capacity, String amenities, String description, Instant createdAt, Instant updatedAt, String imageURL) {
-        this.venueId = venueId;
+    public Venue(Long id, String name, String address, String city, String state, String zip, int capacity, String amenities, String description, String imageURL, Instant createdAt, Instant updatedAt) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
@@ -60,17 +41,17 @@ public class Venue {
         this.capacity = capacity;
         this.amenities = amenities;
         this.description = description;
+        this.imageURL = imageURL;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.imageURL = Venue.this.imageURL;
     }
 
-    public Long getVenueId() {
-        return venueId;
+    public Long getId() {
+        return id;
     }
 
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -137,6 +118,14 @@ public class Venue {
         this.description = description;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -151,13 +140,5 @@ public class Venue {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = Venue.this.imageURL;
     }
 }

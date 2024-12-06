@@ -1,8 +1,10 @@
 package com.dhruvdugar.eventservice.model;
 
+import com.dhruvdugar.eventservice.entity.EventStatus;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Set;
 
 
 public class EventModel {
@@ -13,11 +15,13 @@ public class EventModel {
     private Instant endDateTime;
     private Long venueId;
     private Long organizerId;
+    private EventStatus eventStatus;
+    private Set<CategoryModel> categories;
 
     public EventModel() {
     }
 
-    public EventModel(Long id, String name, String description, Instant startDateTime, Instant endDateTime, Long venueId, Long organizerId) {
+    public EventModel(Long id, String name, String description, Instant startDateTime, Instant endDateTime, Long venueId, Long organizerId, EventStatus eventStatus, Set<CategoryModel> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -25,6 +29,8 @@ public class EventModel {
         this.endDateTime = endDateTime;
         this.venueId = venueId;
         this.organizerId = organizerId;
+        this.eventStatus = eventStatus;
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -81,6 +87,22 @@ public class EventModel {
 
     public void setOrganizerId(Long organizerId) {
         this.organizerId = organizerId;
+    }
+
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
+    public Set<CategoryModel> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryModel> categories) {
+        this.categories = categories;
     }
 }
 

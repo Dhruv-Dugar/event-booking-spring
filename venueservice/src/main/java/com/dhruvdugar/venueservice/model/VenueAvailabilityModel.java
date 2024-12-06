@@ -2,17 +2,16 @@ package com.dhruvdugar.venueservice.model;
 
 import java.time.Instant;
 
-public class VenueAvailability {
+public class VenueAvailabilityModel {
     private Long Id;
     private Long venueId;
     private Instant startDateTime;
     private Instant endDateTime;
 
-
-    public VenueAvailability() {
+    public VenueAvailabilityModel() {
     }
 
-    public VenueAvailability(Long id, Long venueId, Instant startDateTime, Instant endDateTime) {
+    public VenueAvailabilityModel(Long id, Long venueId, Instant startDateTime, Instant endDateTime) {
         Id = id;
         this.venueId = venueId;
         this.startDateTime = startDateTime;
