@@ -1,10 +1,12 @@
 package com.dhruvdugar.eventservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
+@Builder
 public class ErrorResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
@@ -114,4 +116,6 @@ public class ErrorResponse {
     public void setSuccess(Boolean success) {
         this.success = success;
     }
+
+
 }

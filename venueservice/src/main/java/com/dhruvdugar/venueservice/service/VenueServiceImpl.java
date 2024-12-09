@@ -2,6 +2,7 @@ package com.dhruvdugar.venueservice.service;
 
 import com.dhruvdugar.venueservice.entity.Venue;
 import com.dhruvdugar.venueservice.entity.VenueAvailability;
+import com.dhruvdugar.venueservice.exception.ResourceNotFoundException;
 import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
 import com.dhruvdugar.venueservice.model.VenueModel;
 import com.dhruvdugar.venueservice.repository.VenueAvailabilityRepository;
@@ -97,7 +98,8 @@ public class VenueServiceImpl implements VenueService{
         try{
             Venue venue = venueRepo.findById(venueId).get();
         } catch (Exception e){
-            throw new RuntimeException("Venue with venueid "+ venueId + " not found");
+//            throw new RuntimeException("Venue with venueid "+ venueId + " not found");
+            throw new ResourceNotFoundException("Venue", "id", venueId);
         }
 
 
@@ -166,5 +168,4 @@ public class VenueServiceImpl implements VenueService{
         venueAvailabilityModel.setEndDateTime(venueAvailability.getEndDateTime());
         return venueAvailabilityModel;
     }
-
 }
