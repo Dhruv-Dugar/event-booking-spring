@@ -3,6 +3,7 @@ package com.dhruvdugar.eventservice.controller;
 
 import com.dhruvdugar.eventservice.model.APIResponse;
 import com.dhruvdugar.eventservice.model.EventModel;
+import com.dhruvdugar.eventservice.model.EventResponse;
 import com.dhruvdugar.eventservice.service.EventService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,12 @@ public class EventController {
     public ResponseEntity<APIResponse> deleteEvent(@PathVariable("eventId") Long eventId){
         String result = eventService.deleteEvent(eventId);
         return new ResponseEntity<APIResponse>(new APIResponse(true, "Event deleted successfully", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/{eventId}/details")
+    public ResponseEntity<APIResponse> getEventDetails(@PathVariable("eventId") Long eventId){
+        EventResponse eventModel1 = eventService.getEventDetails(eventId);
+        return new ResponseEntity<>(new APIResponse(true, "Event Fetched Succesfully", eventModel1), HttpStatus.OK);
     }
 
 }

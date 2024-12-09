@@ -7,10 +7,11 @@ import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
 import com.dhruvdugar.venueservice.model.VenueModel;
 import com.dhruvdugar.venueservice.repository.VenueAvailabilityRepository;
 import com.dhruvdugar.venueservice.repository.VenueRepository;
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class VenueServiceImpl implements VenueService{
@@ -94,17 +95,13 @@ public class VenueServiceImpl implements VenueService{
     }
 
     @Override
-    public String bookVenue(Long venueId, VenueAvailabilityModel venueAvailabilityModel) {
-        try{
+    public String bookVenue(Long venueId, VenueAvailabilityModel availabilityModel) {
+        try {
             Venue venue = venueRepo.findById(venueId).get();
-        } catch (Exception e){
-//            throw new RuntimeException("Venue with venueid "+ venueId + " not found");
-            throw new ResourceNotFoundException("Venue", "id", venueId);
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException("Venue", "ID", venueId);
         }
-
-
-        VenueAvailability venueAvailability = venueAvailabilityModelToVenueAvailability(venueAvailabilityModel);
-
+        VenueAvailability venueAvailability = venueAvailabilityModelToVenueAvailability(availabilityModel);
         venueAvailability.setVenueId(venueId);
 
         venueAvailabilityRepo.save(venueAvailability);
@@ -112,13 +109,15 @@ public class VenueServiceImpl implements VenueService{
     }
 
     @Override
-    public List<VenueAvailabilityModel> getBookedSlots(Long venueId) {
-        // TODO
-        // change this method to allow if date is also provided and then do processing
-        List<VenueAvailability> venueAvailabilities = venueAvailabilityRepo.findAllByVenueId(venueId);
-        return venueAvailabilities.stream()
-                .map(this::venueAvailabilityToVenueAvailabilityModel)
-                .toList();
+    public List<VenueAvailabilityModel> getBookedSlots(Long venueId, String date) {
+        List<VenueAvailability> venueAvailabilityList;
+        if(date != null){
+            return venueAvailabilityRepo.findAllByVenueIdAndDate(venueId, date);
+        } else {
+            return venueAvailabilityRepo.findAllByVenueId(venueId).stream()
+                    .map(this::venueAvailabilityToVenueAvailabilityModel)
+                    .toList();
+        }
     }
 
 

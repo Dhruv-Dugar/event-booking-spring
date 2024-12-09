@@ -1,10 +1,10 @@
 package com.dhruvdugar.eventservice.exception;
 
 public class CustomException extends RuntimeException {
-    private int errorCode;
+    private String errorCode;
     private int status;
 
-    public CustomException(String message, int errorCode, int status) {
+    public CustomException(String message, String errorCode, int status) {
         super(message);
         this.errorCode = errorCode;
         this.status = status;
@@ -15,11 +15,11 @@ public class CustomException extends RuntimeException {
         this.status = status;
     }
 
-    public int getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(int errorCode) {
+    public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
 

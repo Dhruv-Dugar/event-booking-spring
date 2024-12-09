@@ -56,8 +56,8 @@ public class VenueController {
     }
 
     @GetMapping("/{venueId}/bookedSlots")
-    public ResponseEntity<APIResponse> getBookedSlots(@PathVariable("venueId") Long venueId){
-        List<VenueAvailabilityModel> availabilityModels = venueService.getBookedSlots(venueId);
+    public ResponseEntity<APIResponse> getBookedSlots(@PathVariable("venueId") Long venueId, @RequestParam(required = false) String date){
+        List<VenueAvailabilityModel> availabilityModels = venueService.getBookedSlots(venueId, date);
 
         return ResponseEntity.ok(new APIResponse(true, "Booked slots fetched successfully", availabilityModels));
     }

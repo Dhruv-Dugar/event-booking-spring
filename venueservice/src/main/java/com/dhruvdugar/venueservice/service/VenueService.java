@@ -14,5 +14,5 @@ public interface VenueService {
 
     String bookVenue(Long venueId, VenueAvailabilityModel venueAvailabilityModel);
 
-    List<VenueAvailabilityModel> getBookedSlots(Long venueId);
+    List<VenueAvailabilityModel> getBookedSlots(Long venueId, String date);
 }

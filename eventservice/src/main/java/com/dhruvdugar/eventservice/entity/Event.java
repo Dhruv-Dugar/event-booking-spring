@@ -41,6 +41,22 @@ public class Event {
     @Enumerated
     private EventStatus eventStatus;
 
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
     @ManyToMany
     @JoinTable(
             name="event_category",
@@ -58,7 +74,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(Long id, String name, String description, Instant startDateTime, Instant endDateTime, Long venueId, Long organizerId, Instant createdAt, Instant updatedAt) {
+    public Event(Long id, String name, String description, Instant startDateTime, Instant endDateTime, Long venueId, Long organizerId, EventStatus eventStatus, Set<Category> categories, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -66,6 +82,8 @@ public class Event {
         this.endDateTime = endDateTime;
         this.venueId = venueId;
         this.organizerId = organizerId;
+        this.eventStatus = eventStatus;
+        this.categories = categories;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

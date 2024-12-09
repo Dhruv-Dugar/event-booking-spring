@@ -16,10 +16,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException e){
-//        String message = e.getMessage();
-//        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, message);
-//        return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
-        return null;
+        String message = e.getMessage();
+        ErrorResponse errorResponse = new ErrorResponse(String.valueOf(HttpStatus.NOT_FOUND), message);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ErrorResponse> handleProductServiceException(CustomException customException){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setErrorMessage(customException.getMessage());
+        errorResponse.setErrorCode(customException.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
@@ -32,11 +39,7 @@ public class GlobalExceptionHandler {
         String stackTrace = stringWriter.toString();
 
         return new ResponseEntity<ErrorResponse>(
-//                new ErrorResponse(
-//                        status,
-//                        ex.getMessage(),
-//                        stackTrace
-//                ),
+
                 status
         );
     }

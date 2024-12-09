@@ -20,8 +20,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 //                        .build(), HttpStatus.NOT_FOUND);
 
         ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(ex.getMessage());
-        errorResponse.setCode(ex.getStatus());
+        errorResponse.setErrorMessage(ex.getMessage());
+        errorResponse.setErrorCode(String.valueOf(ex.getStatus()));
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 

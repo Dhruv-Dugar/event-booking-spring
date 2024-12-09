@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.NoSuchElementException;
 
 
 @RestControllerAdvice
@@ -18,6 +19,14 @@ public class GlobalExceptionHandler {
         String message = e.getMessage();
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, message);
         return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponse> noSuchElementExceptionHandler(NoSuchElementException ex){
+        String message = ex.getMessage();
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, message);
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
