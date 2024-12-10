@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FallbackController {
-    @GetMapping("/eventServiceFallback")
+    @GetMapping("/eventServiceFallBack")
     public String eventServiceFallback(){
         return "event service is down";
     }
 
-    @GetMapping("/venueServiceFallback")
+    @GetMapping("/venueServiceFallBack")
     public String venueServiceFallback(){
         return "venue service is down";
     }

@@ -11,6 +11,7 @@ import java.util.Objects;
 @Configuration
 public class OAuthRequestInterceptor {
 
+    // ?? autowired to what?
     @Autowired
     private OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager;
     public void apply(RequestTemplate template){

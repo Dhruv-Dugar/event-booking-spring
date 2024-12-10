@@ -2,13 +2,14 @@ package com.dhruvdugar.eventservice.service;
 
 
 import com.dhruvdugar.eventservice.entity.Event;
+import com.dhruvdugar.eventservice.external.client.VenueAvailabilityModel;
 import com.dhruvdugar.eventservice.external.client.VenueModel;
 import com.dhruvdugar.eventservice.external.client.VenueService;
 import com.dhruvdugar.eventservice.model.APIResponse;
 import com.dhruvdugar.eventservice.model.EventModel;
 import com.dhruvdugar.eventservice.model.EventResponse;
 import com.dhruvdugar.eventservice.repository.EventRepository;
-import com.dhruvdugar.venueservice.model.VenueAvailabilityModel;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

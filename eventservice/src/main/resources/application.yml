@@ -5,32 +5,33 @@ spring:
     name: EVENT-SERVICE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    password: admin
     password: admin@123
     url: jdbc:mysql://localhost:3306/eventservicedb
     username: root
   jpa:
     show-sql: true
     hibernate:
-        ddl-auto: update
+      ddl-auto: create
   config:
     import: configserver:http://localhost:9296
+
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri : https://dev-32106046.okta.com/oauth2/default
+          issuer-uri: https://dev-32106046.okta.com/oauth2/default
       client:
-        registration :
+        registration:
           internal-client:
             provider: okta
             authorizationGrantType: client_credentials
             scope:
               - internal
-            client-id: 0oalr4pyzkdPd0SLB5d7
-            client-secret: I_gSLCvSaqqG08HkfR0OxIEKBna10qarChazuPOR0WRe1_h1RfDyKAShq77XCVPL
-resilience4j :
-  circuitbreaker :
+            clientId: 0oalrbvvm4xYfHPxs5d7
+            clientSecret: qs6-4rv0MzqNHgxCPbQjcyr09dVXXRuFnip4oQOSHDB4wsMDkgXIq5R1xxTUp-C8
+
+resilience4j:
+  circuitbreaker:
     instances:
       external:
         event-consumer-buffer-size: 10
@@ -41,4 +42,9 @@ resilience4j :
         permitted-number-of-calls-in-half-open-state: 3
         sliding-window-size: 10
         sliding-window-type: COUNT_BASED
-
+#eureka:
+#    instance:
+#        prefer-ip-address: true
+#    client:
+#        fetch-registry: true
+#        register-with-eureka: true

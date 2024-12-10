@@ -1,7 +1,7 @@
 package com.dhruvdugar.eventservice.external.decoder;
 
 import com.dhruvdugar.eventservice.exception.CustomException;
-import com.dhruvdugar.venueservice.model.ErrorResponse;
+import com.dhruvdugar.eventservice.model.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Response;
 import feign.codec.ErrorDecoder;
@@ -16,7 +16,7 @@ public class CustomErrorDecoder implements ErrorDecoder {
 
         try{
             ErrorResponse errorResponse = objectMapper.readValue(response.body().asInputStream(), ErrorResponse.class);
-             return new CustomException(errorResponse.getMessage(), String.valueOf(errorResponse.getCode()), response.status());
+             return new CustomException(errorResponse.getErrorMessage(), String.valueOf(errorResponse.getErrorCode()), response.status());
         } catch (IOException e) {
 
             throw new CustomException("Internal Server Error", "500", 500);

@@ -4,44 +4,47 @@ spring:
   application:
     name: API-GATEWAY
   config:
-    import: configserver:http://localhost:9296
+    import:
+      - configserver:http://localhost:9296
   cloud:
     gateway:
       routes:
         - id: EVENT-SERVICE
           uri: lb://EVENT-SERVICE
           predicates:
-            - Path=/api/events/**, /api/categories/**
+            - Path=/api/events**, /api/categories**
           filters:
             - name: CircuitBreaker
               args:
                 name: eventServiceCB
-                fallbackUri: forward:/eventServiceFallback
+                fallbackUri: forward:/eventServiceFallBack
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
                 redis-rate-limiter.requestedTokens: 1
+
         - id: VENUE-SERVICE
           uri: lb://VENUE-SERVICE
           predicates:
-            - Path=/api/venues/**
-          filters :
-            - name : CircuitBreaker
-              args :
-                name : venueServiceCB
-                fallbackUri : forward:/venueServiceFallback
-            - name : RequestRateLimiter
-              args :
-                redis-rate-limiter.replenishRate : 1
-                redis-rate-limiter.burstCapacity : 1
-                redis-rate-limiter.requestedTokens : 1
-    discovery :
-      enabled : true
+            - Path=/api/venues**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: venueServiceCB
+                fallbackUri: forward:/venueServiceFallBack
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+                redis-rate-limiter.requestedTokens: 1
+
+    discovery:
+      enabled: true
 okta:
   oauth2:
-    issuer : https://dev-32106046.okta.com/oauth2/default
-    audience : api://default
-    client-id : 0oalr4pyzkdPd0SLB5d7
-    client-secret : I_gSLCvSaqqG08HkfR0OxIEKBna10qarChazuPOR0WRe1_h1RfDyKAShq77XCVPL
-    scopes : openid, email, profile, offline_access
+    issuer: https://dev-32106046.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oalrbvvm4xYfHPxs5d7
+    client-secret: qs6-4rv0MzqNHgxCPbQjcyr09dVXXRuFnip4oQOSHDB4wsMDkgXIq5R1xxTUp-C8
+    scopes: openid,email,profile,offline_access
