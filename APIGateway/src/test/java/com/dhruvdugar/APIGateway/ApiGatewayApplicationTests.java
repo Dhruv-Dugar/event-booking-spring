@@ -1,10 +1,10 @@
-package com.dhruvdugar.apigateway;
+package com.dhruvdugar.APIGateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApigatewayApplicationTests {
+class ApiGatewayApplicationTests {
 
 	@Test
 	void contextLoads() {
