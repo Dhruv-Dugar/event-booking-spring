@@ -38,3 +38,10 @@ spring:
                 redis-rate-limiter.requestedTokens : 1
     discovery :
       enabled : true
+okta:
+  oauth2:
+    issuer : https://dev-32106046.okta.com/oauth2/default
+    audience : api://default
+    client-id : 0oalr4pyzkdPd0SLB5d7
+    client-secret : I_gSLCvSaqqG08HkfR0OxIEKBna10qarChazuPOR0WRe1_h1RfDyKAShq77XCVPL
+    scopes : openid, email, profile, offline_access
