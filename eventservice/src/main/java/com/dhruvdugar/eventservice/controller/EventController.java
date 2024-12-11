@@ -9,7 +9,6 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,7 +52,6 @@ public class EventController {
         return new ResponseEntity<APIResponse>(new APIResponse(true, "Event updated successfully", updatedEvent), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin')")
     @DeleteMapping("/{eventId}")
     public ResponseEntity<APIResponse> deleteEvent(@PathVariable("eventId") Long eventId){
         logger.info("Deleting Event by id" + eventId);

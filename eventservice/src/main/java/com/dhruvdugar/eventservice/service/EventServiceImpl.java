@@ -9,7 +9,6 @@ import com.dhruvdugar.eventservice.model.APIResponse;
 import com.dhruvdugar.eventservice.model.EventModel;
 import com.dhruvdugar.eventservice.model.EventResponse;
 import com.dhruvdugar.eventservice.repository.EventRepository;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
