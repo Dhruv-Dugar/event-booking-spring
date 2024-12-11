@@ -25,7 +25,6 @@ public class EventController {
     private EventService eventService;
 
 
-    @PreAuthorize("hasAuthority('Admin')")
     @PostMapping
     public ResponseEntity<APIResponse> createEvent(@RequestBody EventModel eventModel) {
         logger.info("Creating Event");
@@ -33,7 +32,6 @@ public class EventController {
         return new ResponseEntity<APIResponse>(new APIResponse(true, "Event created successfully", eventModel1), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
     @GetMapping("/{eventId}")
     public ResponseEntity<APIResponse> getEvents(@PathVariable("eventId") Long eventId){
         logger.info("Fetching Event by id" + eventId);
@@ -41,7 +39,6 @@ public class EventController {
         return new ResponseEntity<APIResponse>(new APIResponse(true, "Event fetched successfully", eventModel1), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
     @GetMapping
     public ResponseEntity<APIResponse> getAllEvents(){
         List<EventModel> events = eventService.getAllEvents();
@@ -49,7 +46,6 @@ public class EventController {
         return new ResponseEntity<APIResponse>(new APIResponse(true, "All Events fetched successfully", events), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin')")
     @PutMapping("/{eventId}")
     public ResponseEntity<APIResponse> updateEvent(@PathVariable("eventId") Long eventId, @RequestBody EventModel eventModel){
         logger.info("Updating Event by id" + eventId);
@@ -65,7 +61,6 @@ public class EventController {
         return new ResponseEntity<APIResponse>(new APIResponse(true, "Event deleted successfully", null), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
     @GetMapping("/{eventId}/details")
     public ResponseEntity<APIResponse> getEventDetails(@PathVariable("eventId") Long eventId){
         logger.info("Fetching Event Details by id" + eventId);

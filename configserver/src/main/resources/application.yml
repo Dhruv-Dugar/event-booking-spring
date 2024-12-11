@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Deloitte-vishwas/spring-app-config
+          uri: https://github.com/Dhruv-Dugar/spring-event-config
           clone-on-start: true
 eureka:
   instance:

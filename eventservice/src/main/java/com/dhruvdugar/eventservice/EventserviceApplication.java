@@ -1,6 +1,6 @@
 package com.dhruvdugar.eventservice;
 
-import com.dhruvdugar.eventservice.config.OAuth2RestInterceptor;
+//import com.dhruvdugar.eventservice.config.OAuth2RestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,48 +25,48 @@ public class EventserviceApplication {
 		SpringApplication.run(EventserviceApplication.class, args);
 	}
 
-//	@Bean
-//	@LoadBalanced
-//	public RestTemplate restTemplate() {
-//		return new RestTemplate();
-//	}
-//
-
-	@Autowired
-	private ClientRegistrationRepository clientRegistrationRepository;
-	@Autowired
-	private OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository;
-
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate() {
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.setInterceptors(
-				List.of(
-						new OAuth2RestInterceptor(
-								clientManager(clientRegistrationRepository, oAuth2AuthorizedClientRepository)
-						)
-				)
-		);
-		return restTemplate;
+		return new RestTemplate();
 	}
 
-	@Bean
-	public OAuth2AuthorizedClientManager clientManager(
-			ClientRegistrationRepository clientRegistrationRepository,
-			OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository
-	){
-		OAuth2AuthorizedClientProvider oAuth2AuthorizedClientProvider
-				= OAuth2AuthorizedClientProviderBuilder
-				.builder()
-				.clientCredentials()
-				.build();
-
-		DefaultOAuth2AuthorizedClientManager oAuth2AuthorizedClientManager
-				= new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, oAuth2AuthorizedClientRepository);
-
-		oAuth2AuthorizedClientManager.setAuthorizedClientProvider(oAuth2AuthorizedClientProvider);
-
-		return oAuth2AuthorizedClientManager;
-	}
+//
+//	@Autowired
+//	private ClientRegistrationRepository clientRegistrationRepository;
+//	@Autowired
+//	private OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository;
+//
+//	@Bean
+//	@LoadBalanced
+//	public RestTemplate restTemplate() {
+//		RestTemplate restTemplate = new RestTemplate();
+//		restTemplate.setInterceptors(
+//				List.of(
+//						new OAuth2RestInterceptor(
+//								clientManager(clientRegistrationRepository, oAuth2AuthorizedClientRepository)
+//						)
+//				)
+//		);
+//		return restTemplate;
+//	}
+//
+//	@Bean
+//	public OAuth2AuthorizedClientManager clientManager(
+//			ClientRegistrationRepository clientRegistrationRepository,
+//			OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository
+//	){
+//		OAuth2AuthorizedClientProvider oAuth2AuthorizedClientProvider
+//				= OAuth2AuthorizedClientProviderBuilder
+//				.builder()
+//				.clientCredentials()
+//				.build();
+//
+//		DefaultOAuth2AuthorizedClientManager oAuth2AuthorizedClientManager
+//				= new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, oAuth2AuthorizedClientRepository);
+//
+//		oAuth2AuthorizedClientManager.setAuthorizedClientProvider(oAuth2AuthorizedClientProvider);
+//
+//		return oAuth2AuthorizedClientManager;
+//	}
 }

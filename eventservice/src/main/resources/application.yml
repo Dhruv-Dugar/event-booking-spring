@@ -5,7 +5,8 @@ spring:
     name: EVENT-SERVICE
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: admin@123
+    password: admin
+#    password: admin@123
     url: jdbc:mysql://localhost:3306/eventservicedb
     username: root
   jpa:
@@ -15,20 +16,20 @@ spring:
   config:
     import: configserver:http://localhost:9296
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://dev-32106046.okta.com/oauth2/default
-      client:
-        registration:
-          internal-client:
-            provider: okta
-            authorizationGrantType: client_credentials
-            scope:
-              - internal
-            clientId: 0oalrbvvm4xYfHPxs5d7
-            clientSecret: qs6-4rv0MzqNHgxCPbQjcyr09dVXXRuFnip4oQOSHDB4wsMDkgXIq5R1xxTUp-C8
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://dev-32106046.okta.com/oauth2/default
+#      client:
+#        registration:
+#          internal-client:
+#            provider: okta
+#            authorizationGrantType: client_credentials
+#            scope:
+#              - internal
+#            clientId: 0oalrbvvm4xYfHPxs5d7
+#            clientSecret: qs6-4rv0MzqNHgxCPbQjcyr09dVXXRuFnip4oQOSHDB4wsMDkgXIq5R1xxTUp-C8
 
 resilience4j:
   circuitbreaker:
