@@ -16,15 +16,15 @@ import java.time.Duration;
 @SpringBootApplication
 public class ApiGatewayApplication {
 
-	@Bean
-	public KeyResolver userKeyResolver(){return exchange -> Mono.just("userKey");}
-
-	@Bean
-	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
-	}
+//	@Bean
+//	public KeyResolver userKeyResolver(){return exchange -> Mono.just("userKey");}
+//
+//	@Bean
+//	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
+//		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
+//				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
+//				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
